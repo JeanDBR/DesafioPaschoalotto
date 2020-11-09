@@ -1,0 +1,50 @@
+<h3>
+  Minhas Dívidas
+</h3>
+<hr />
+<form>
+  <div class="row col-12">
+    <h5>
+      Cadastro de Dívidas
+    </h5>
+  </div>
+  <div class="row col-12 pt-3 pb-5">
+    <div class="col-6">
+      <label for="txtDtVencimento">Data de Vencimento</label>
+      <input type="date" class="form-control" id="txtDtVencimento" max="{{dataAtual}}">
+    </div>
+    <div class="col-2">
+      <label for="txtQtdParcelas">Nº Parcelas (max: {{qtdMaximaParcelas}})</label>
+      <input type="number" min="1" class="form-control" value="1" max="{{qtdMaximaParcelas}}" id="txtQtdParcelas">
+    </div>
+    <div class="col-2">
+      <label for="txtVlrOriginal">Valor Total da Dívida</label>
+      <input type="text" class="form-control" (blur)="atualizarValorParcela()" id="txtVlrOriginal" currencyMask [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }">
+    </div>
+    <div class="col-2">
+      <label for="txtVlrporParc">Valor por Parcela</label>
+      <input type="text" class="form-control" id="txtVlrporParc" currencyMask [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }">
+    </div>
+  </div>
+</form>
+
+<table class="table">
+  <thead class="thead-light">
+    <tr>
+      <th scope="col" hidden>Cod</th>
+      <th scope="col">Valor Original</th>
+      <th scope="col">Qtde Parcelas</th>
+      <th scope="col">Data de Vencimento</th>
+      <th scope="col">Atraso(dias)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let divida of dividas">
+      <th scope="row" hidden>{{divida.Div_id}}</th>
+      <td>{{divida.vlrDividaOriginal}}</td>
+      <td>{{divida.qtdParcelas}}</td>
+      <td>{{divida.dtVencimento}}</td>
+      <td>{{divida.diasAtraso}}</td>
+    </tr>
+  </tbody>
+</table>
